@@ -1,25 +1,53 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import Tickets from "./components/Tickets";
+import TicketForm from "./components/TicketForm";
+import sample from "./sample/sample.json";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  state = {
+    tickets: sample.tickets,
+  };
+
+  addTicket = (title, description, _id) => {
+    const newTicket = {
+      title: title,
+      description: description,
+      _id: this.state.tickets.length,
+    };
+    this.setState({
+      tickets: [...this.state.tickets, newTicket],
+    });
+  };
+
+  deleteTicket = (_id) => {
+    const newTickets = this.state.tickets.filter((ticket) => ticket._id !== _id);
+    this.setState({tickets: newTickets})
+  };
+
+  checkDone = _id => {
+    const newTickets = this.state.tickets.map( ticket => {
+      if(ticket._id === _id){
+        ticket.done = !ticket.done
+      }
+      return ticket
+    
+    })
+
+    this.setState({tickets: newTickets})
+  }
+
+  render() {
+    return (
+      <div>
+        <TicketForm addTicket={this.addTicket} />
+        <Tickets
+          tickets={this.state.tickets}
+          deleteTicket={this.deleteTicket}
+          checkDone={this.checkDone}
+        />
+      </div>
+    );
+  }
 }
 
 export default App;

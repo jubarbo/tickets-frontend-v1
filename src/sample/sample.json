@@ -1,0 +1,31 @@
+{
+  "totalItems": 8,
+  "tickets": [
+    {
+      "done": false,
+      "_id": "5ff7bb438982ae19e6c5562c",
+      "title": "holis",
+      "description": "to set everything",
+      "createdAt": "2021-01-08T01:54:11.161Z",
+      "updatedAt": "2021-01-09T19:23:14.056Z"
+    },
+    {
+      "done": false,
+      "_id": "5ff7c4d811c3cb1b12ed9d01",
+      "title": "make a very good app",
+      "description": "to set everything",
+      "createdAt": "2021-01-08T02:35:04.166Z",
+      "updatedAt": "2021-01-08T02:35:04.166Z"
+    },
+    {
+      "done": true,
+      "_id": "5ff8ba714212e14f1736e30e",
+      "title": "let me know",
+      "description": "how u feeling",
+      "createdAt": "2021-01-08T20:02:57.577Z",
+      "updatedAt": "2021-01-08T20:02:57.577Z"
+    }
+  ],
+  "totalPages": 3,
+  "currentPage": 0
+}
