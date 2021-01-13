@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Ticket from "./Ticket";
+import Ticket from "../components/Ticket/Ticket";
 import propTypes from "prop-types";
 
 class Tickets extends Component {

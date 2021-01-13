@@ -1,11 +1,35 @@
 import React, { Component } from "react";
-import Tickets from "./components/Tickets";
-import TicketForm from "./components/TicketForm";
-import sample from "./sample/sample.json";
+import Tickets from "./pages/Tickets";
+import TicketForm from "./components/Ticket/TicketForm";
 
 class App extends Component {
   state = {
-    tickets: sample.tickets,
+    tickets: [],
+    loading: true,
+    error: false,
+  };
+
+  componentDidMount() {
+    this.fetchData();
+
+    this.intervalId = setInterval(this.fetchData, 5000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.intervalId);
+  }
+
+  fetchData = async () => {
+    console.log(this.state.loading);
+    this.setState({ loading: true, error: null });
+    try {
+      const data = await (
+        await fetch("http://93.189.91.4:3000/api/tickets")
+      ).json();
+      this.setState({ loading: false, tickets: data.tickets });
+    } catch (error) {
+      this.setState({ loading: false, error: error });
+    }
   };
 
   addTicket = (title, description, _id) => {
@@ -20,21 +44,22 @@ class App extends Component {
   };
 
   deleteTicket = (_id) => {
-    const newTickets = this.state.tickets.filter((ticket) => ticket._id !== _id);
-    this.setState({tickets: newTickets})
+    const newTickets = this.state.tickets.filter(
+      (ticket) => ticket._id !== _id
+    );
+    this.setState({ tickets: newTickets });
   };
 
-  checkDone = _id => {
-    const newTickets = this.state.tickets.map( ticket => {
-      if(ticket._id === _id){
-        ticket.done = !ticket.done
+  checkDone = (_id) => {
+    const newTickets = this.state.tickets.map((ticket) => {
+      if (ticket._id === _id) {
+        ticket.done = !ticket.done;
       }
-      return ticket
-    
-    })
+      return ticket;
+    });
 
-    this.setState({tickets: newTickets})
-  }
+    this.setState({ tickets: newTickets });
+  };
 
   render() {
     return (
