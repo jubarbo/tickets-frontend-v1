@@ -37,7 +37,7 @@ class TicketForm extends Component {
       title: title,
       description: description,
     };
-    console.log(`esto es ${JSON.stringify(newTicket)}` )
+    console.log(`esto es ${JSON.stringify(newTicket)}`);
     await fetch("http://93.189.91.4:3000/api/tickets", {
       method: "POST",
       mode: "cors",
@@ -49,8 +49,6 @@ class TicketForm extends Component {
       referrerPolicy: "no-referrer",
       body: JSON.stringify(newTicket),
     });
-
-
   };
 
   render() {
