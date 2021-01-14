@@ -19,7 +19,6 @@ class TicketList extends Component {
 
     this.intervalId = setInterval(async () => {
       await this.fetchData();
-      console.log(this);
     }, 5000);
   }
 

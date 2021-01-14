@@ -1,5 +1,12 @@
 import React, { Component } from "react";
 import propTypes from "prop-types";
+import {
+  Button,
+  FormControl,
+  Container,
+  Checkbox,
+  InputLabel,
+} from "@material-ui/core";
 
 class Ticket extends Component {
   isDoneStyle() {
@@ -13,21 +20,32 @@ class Ticket extends Component {
   render() {
     const { ticket } = this.props;
     return (
-      <p style={this.isDoneStyle()}>
-        {ticket.title} - {ticket.description} -
-        {ticket.done ? "Hecho" : "No hecho"} - {ticket._id}
-        <input
-          type="checkbox"
-          checked={ticket.done}
-          onChange={this.props.checkDone.bind(this, ticket._id)}
-        />
-        <button
-          style={btnDelete}
-          onClick={this.props.deleteTicket.bind(this, ticket._id)}
-        >
-          X
-        </button>
-      </p>
+      <Container>
+        <p style={this.isDoneStyle()}>
+          {ticket.title} - {ticket.description} -
+          {ticket.done ? "Hecho" : "No hecho"} - {ticket._id}
+        </p>
+        <InputLabel htmlFor="done">
+          Hecho
+          <Checkbox
+            id="done"
+            color="primary"
+            laber="Hecho"
+            checked={ticket.done}
+            onChange={this.props.checkDone.bind(this, ticket._id)}
+          />
+        </InputLabel>
+        <FormControl>
+          <Button
+            style={btnDelete}
+            onClick={this.props.deleteTicket.bind(this, ticket._id)}
+            variant="contained"
+            color="secondary"
+          >
+            Eliminar
+          </Button>
+        </FormControl>
+      </Container>
     );
   }
 }
@@ -37,13 +55,13 @@ Ticket.propTypes = {
 };
 
 const btnDelete = {
-  fontSize: "18px",
   background: "#ea2027",
-  color: "#fff",
-  border: "none",
-  padding: "10px",
-  borderRadius: "50%",
-  cursor: "pointer",
+  // fontSize: "18px",
+  // color: "#fff",
+  // border: "none",
+  // padding: "10px",
+  // borderRadius: "50%",
+  // cursor: "pointer",
 };
 
 export default Ticket;
