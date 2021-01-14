@@ -33,9 +33,28 @@ class TicketList extends Component {
     return data;
   };
 
-  deleteTicket = (_id) => {
-    const newTickets = this.state.data.filter((ticket) => ticket._id !== _id);
-    this.setState({ data: newTickets });
+  onDelete = (_id) => {
+    
+    this.deleteTicket(_id)
+      .then(async (res) => {
+        const message = await res.json();
+        console.log(message);
+        const newTickets = this.state.data.filter(
+          (ticket) => ticket._id !== _id
+        );
+        this.setState({ data: newTickets });
+      })
+      .catch((err) => {
+        console.log(err);
+        this.setState({ error: err });
+      });
+  };
+
+  deleteTicket = async (_id) => {
+    const res = await fetch(`http://93.189.91.4:3000/api/tickets/${_id}`, {
+      method: "DELETE",
+    });
+    return res;
   };
 
   checkDone = (_id) => {
@@ -54,7 +73,7 @@ class TicketList extends Component {
       <Ticket
         ticket={ticket}
         key={ticket._id}
-        deleteTicket={this.deleteTicket}
+        onDelete={this.onDelete}
         checkDone={this.checkDone}
       />
     ));

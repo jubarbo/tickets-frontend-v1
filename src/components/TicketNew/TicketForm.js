@@ -17,8 +17,9 @@ class TicketForm extends Component {
     e.preventDefault();
 
     this.addTicket(this.state.title, this.state.description)
-      .then((response) => {
-        console.log(response);
+      .then(async (res) => {
+        const ticket = await res.json();
+        console.log(`Ticket ${ticket._id} created.`);
       })
       .catch((err) => {
         console.log(err);
@@ -37,8 +38,7 @@ class TicketForm extends Component {
       title: title,
       description: description,
     };
-    console.log(`esto es ${JSON.stringify(newTicket)}`);
-    await fetch("http://93.189.91.4:3000/api/tickets", {
+    const res = await fetch("http://93.189.91.4:3000/api/tickets", {
       method: "POST",
       mode: "cors",
       cache: "no-cache",
@@ -49,6 +49,7 @@ class TicketForm extends Component {
       referrerPolicy: "no-referrer",
       body: JSON.stringify(newTicket),
     });
+    return res;
   };
 
   render() {

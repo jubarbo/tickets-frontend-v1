@@ -1,0 +1,7 @@
+### Post a ticket
+POST http://93.189.91.4:3000/api/tickets
+Content-Type: application/json
+
+{
+    "title": "doing something great",
+    "description": "how u new"}

@@ -9,6 +9,11 @@ import {
 } from "@material-ui/core";
 
 class Ticket extends Component {
+  state = {
+    data: this.props,
+    loading: false,
+    error: false,
+  };
   isDoneStyle() {
     return {
       fontSize: "20px",
@@ -17,8 +22,36 @@ class Ticket extends Component {
     };
   }
 
+
+  // onDelete = (e) => {
+  //   const _id = this.props.ticket._id;
+  //   this.deleteTicket(_id)
+  //     .then(async (res) => {
+  //       const message = await res.json();
+  //       console.log(message);
+  //       console.log(this.state)
+  //       // const newTickets = this.state.data.filter((ticket) => ticket._id !== _id);
+  //       // this.setState({ data: newTickets });
+
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //       this.setState({ error: err });
+  //     });
+  // };
+
+  // deleteTicket = async (_id) => {
+  //   const res = await fetch(`http://93.189.91.4:3000/api/tickets/${_id}`, {
+  //     method: "DELETE",
+  //   });
+  //   return res;
+
+    
+  // };
+
   render() {
-    const { ticket } = this.props;
+    const { ticket } = this.state.data;
+    
     return (
       <Container>
         <p style={this.isDoneStyle()}>
@@ -38,7 +71,8 @@ class Ticket extends Component {
         <FormControl>
           <Button
             style={btnDelete}
-            onClick={this.props.deleteTicket.bind(this, ticket._id)}
+            // onClick={this.props.deleteTicket.bind(this, ticket._id)}
+            onClick={this.props.onDelete.bind(this, ticket._id)}
             variant="contained"
             color="secondary"
           >
