@@ -10,7 +10,6 @@ class Ticket extends Component {
     };
   }
 
-
   render() {
     const { ticket } = this.props;
     return (
@@ -28,7 +27,6 @@ class Ticket extends Component {
         >
           X
         </button>
-
       </p>
     );
   }

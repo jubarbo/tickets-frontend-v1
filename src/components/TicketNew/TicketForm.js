@@ -6,17 +6,51 @@ class TicketForm extends Component {
   state = {
     title: "",
     description: "",
+    loading: true,
+    error: false,
   };
 
+  componentDidMount() {
+    this.setState({ loading: false });
+  }
   onSubmit = (e) => {
-    this.props.addTicket(this.state.title, this.state.description);
     e.preventDefault();
+
+    this.addTicket(this.state.title, this.state.description)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((err) => {
+        console.log(err);
+        this.setState({ error: err });
+      });
   };
 
   onChange = (e) => {
     this.setState({
       [e.target.name]: e.target.value,
     });
+  };
+
+  addTicket = async (title, description) => {
+    const newTicket = {
+      title: title,
+      description: description,
+    };
+    console.log(`esto es ${JSON.stringify(newTicket)}` )
+    await fetch("http://93.189.91.4:3000/api/tickets", {
+      method: "POST",
+      mode: "cors",
+      cache: "no-cache",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      redirect: "follow",
+      referrerPolicy: "no-referrer",
+      body: JSON.stringify(newTicket),
+    });
+
+
   };
 
   render() {
@@ -48,11 +82,8 @@ class TicketForm extends Component {
         </FormControl>
         <br />
         <FormControl>
-          <Button 
-            variant="contained" 
-            color="primary" 
-            onClick={this.onSubmit}>
-              Enviar
+          <Button variant="contained" color="primary" onClick={this.onSubmit}>
+            Enviar
           </Button>
         </FormControl>
       </Container>

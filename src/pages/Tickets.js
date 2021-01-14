@@ -1,22 +1,12 @@
 import React, { Component } from "react";
-import Ticket from "../components/Ticket/Ticket";
-import propTypes from "prop-types";
-
+import TicketList from "../components/Ticket/TicketList";
 class Tickets extends Component {
+
+
   render() {
-    return this.props.tickets.map((ticket) => (
-      <Ticket
-        ticket={ticket}
-        key={ticket._id}
-        deleteTicket={this.props.deleteTicket}
-        checkDone={this.props.checkDone}
-      />
-    ));
-  }
+    return <TicketList />;
+ }
 }
 
-Tickets.propTypes = {
-  tickets: propTypes.array.isRequired,
-};
 
 export default Tickets;
