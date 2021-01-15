@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import propTypes from "prop-types";
+import { Link } from "react-router-dom";
 import {
   Button,
   FormControl,
@@ -14,7 +15,7 @@ class Ticket extends Component {
     loading: false,
     error: false,
   };
-  
+
   isDoneStyle() {
     return {
       fontSize: "20px",
@@ -27,10 +28,12 @@ class Ticket extends Component {
     const { ticket } = this.props;
     return (
       <Container>
-        <p style={this.isDoneStyle()}>
-          {ticket.title} - {ticket.description} -
-          {ticket.done ? "Hecho" : "No hecho"} - {ticket._id}
-        </p>
+        <Link to={`/ticket/${ticket._id}`}>
+          <p style={this.isDoneStyle()}>
+            {ticket.title} - {ticket.description} -
+            {ticket.done ? "Hecho" : "No hecho"} - {ticket._id}
+          </p>
+        </Link>
         <InputLabel htmlFor="done">
           Hecho
           <Checkbox

@@ -59,7 +59,7 @@ class TicketList extends Component {
   onCheck = (_id) => {
     this.state.data.map((ticket) => {
       if (ticket._id === _id) {
-        const ticketState = JSON.stringify(this.state)
+        // const ticketState = JSON.stringify(this.state)
         ticket.done = !ticket.done;
         this.setState({ done: ticket.done });
 
@@ -73,8 +73,8 @@ class TicketList extends Component {
             this.setState({ error: err });
           });
       }
+      return ticket
     });
-    console.log(_id);
   };
 
   updateCheckDone = async (_id, isDone) => {
