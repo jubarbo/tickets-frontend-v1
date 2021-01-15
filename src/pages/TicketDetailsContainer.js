@@ -9,7 +9,6 @@ import {
   Container,
 } from "@material-ui/core";
 
-
 export default class TicketDetailsContainer extends Component {
   state = {
     data: [],
@@ -53,7 +52,6 @@ export default class TicketDetailsContainer extends Component {
 
   onCheck = (_id) => {
     const ticket = this.state.data;
-    // console.log(ticket);
     ticket.done = !ticket.done;
     this.setState({ done: ticket.done });
 
@@ -93,7 +91,6 @@ export default class TicketDetailsContainer extends Component {
       return <CircularProgress />;
     }
     const ticket = this.state.data;
-    console.log(ticket);
 
     return (
       <Container>
@@ -104,6 +101,16 @@ export default class TicketDetailsContainer extends Component {
         />
 
         <FormControl>
+          
+          <br />
+          <Button
+            href={`/edit/${ticket._id}`}
+            variant="contained"
+            color="primary"
+          >
+            Actualizar
+          </Button>
+
           <Button
             style={btnDelete}
             onClick={this.onDelete}

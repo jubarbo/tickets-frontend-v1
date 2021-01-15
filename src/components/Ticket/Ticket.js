@@ -68,11 +68,18 @@ class Ticket extends Component {
           <FormControl>
             <Button
             href={`/ticket/${ticket._id}`}
-              // onClick={this.props.onDelete.bind(this, ticket._id)}
               variant="contained"
               color="primary"
             >
               Ver Más
+            </Button>
+            <br />
+            <Button
+            href={`/edit/${ticket._id}`}
+              variant="outlined"
+              color="secondary"
+            >
+              Actualizar
             </Button>
           </FormControl>
         </CardContent>

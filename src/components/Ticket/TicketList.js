@@ -41,22 +41,6 @@ class TicketList extends Component {
     return res;
   };
 
-  // onDelete = (_id) => {
-  //   this.deleteTicket(_id)
-  //     .then(async (res) => {
-  //       const message = await res.json();
-  //       console.log(message);
-  //       const newTickets = this.state.data.filter(
-  //         (ticket) => ticket._id !== _id
-  //       );
-  //       this.setState({ data: newTickets });
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //       this.setState({ error: err });
-  //     });
-  // };
-
   onCheck = (_id) => {
     this.state.data.map((ticket) => {
       if (ticket._id === _id) {
@@ -98,7 +82,6 @@ class TicketList extends Component {
       <Ticket
         ticket={ticket}
         key={ticket._id}
-        // onDelete={this.onDelete}
         checkDone={this.onCheck}
       />
     ));

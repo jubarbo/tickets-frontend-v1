@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Tickets from "./pages/Tickets";
 import TicketNew from "./pages/TicketNew";
 import TicketDetailsContainer from "./pages/TicketDetailsContainer";
+import TicketEditContainer from "./pages/TicketEditContainer";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Layout from "./components/Layout";
 class App extends Component {
@@ -12,7 +13,16 @@ class App extends Component {
           <Switch>
             <Route exact path="/" component={Tickets} />
             <Route exact path="/new" component={TicketNew} />
-            <Route exact path="/ticket/:ticketId" component={TicketDetailsContainer} />
+            <Route
+              exact
+              path="/ticket/:ticketId"
+              component={TicketDetailsContainer}
+            />
+            <Route
+              exact
+              path="/edit/:ticketId"
+              component={TicketEditContainer}
+            />
           </Switch>
         </Layout>
       </BrowserRouter>

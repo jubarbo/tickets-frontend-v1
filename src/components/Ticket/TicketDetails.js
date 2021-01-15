@@ -3,8 +3,6 @@ import propTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 import {
-  Button,
-  FormControl,
   Card,
   Checkbox,
   InputLabel,
@@ -65,8 +63,6 @@ class TicketDetails extends Component {
               onChange={this.props.checkDone.bind(this, ticket._id)}
             />
           </InputLabel>
-
-          <FormControl></FormControl>
         </CardContent>
       </Card>
     );
