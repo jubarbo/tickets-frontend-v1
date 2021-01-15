@@ -59,7 +59,6 @@ class TicketList extends Component {
   onCheck = (_id) => {
     this.state.data.map((ticket) => {
       if (ticket._id === _id) {
-        // const ticketState = JSON.stringify(this.state)
         ticket.done = !ticket.done;
         this.setState({ done: ticket.done });
 

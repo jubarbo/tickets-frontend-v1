@@ -16,6 +16,12 @@ class Ticket extends Component {
     error: false,
   };
 
+  classCheckDone() {
+    return {
+      width: "4em",
+    };
+  }
+
   isDoneStyle() {
     return {
       fontSize: "20px",
@@ -38,6 +44,7 @@ class Ticket extends Component {
           Hecho
           <Checkbox
             id="done"
+            className="checkDone"
             color="primary"
             laber="Hecho"
             checked={ticket.done}

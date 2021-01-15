@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import TicketDetails from "../components/Ticket/TicketDetails";
-
+import { CircularProgress } from "@material-ui/core";
 export default class TicketDetailsContainer extends Component {
   state = {
     data: [],
@@ -8,23 +8,28 @@ export default class TicketDetailsContainer extends Component {
     error: false,
   };
 
-//   componentDidMount() {
-//     this.fetchData();
-//   }
+  componentDidMount() {
+    this.fetchData();
+  }
 
-//   fetchData = async () => {
-//     this.setState({ loading: true, error: null });
+  fetchData = async () => {
+    this.setState({ loading: true, error: null });
+    const ticketId = this.props.match.params.ticketId;
 
-//     try {
-//         console.log(this.props.match)
-//     //   const data = await api.badges.read(this.props.match.params.badgeId);
-//       this.setState({ loading: false, data: data });
-//     } catch (e) {
-//       this.setState({ loading: false, error: e });
-//     }
-//   };
-
+    await fetch(`http://93.189.91.4:3000/api/tickets/${ticketId}`)
+      .then(async (res) => {
+        const data = await res.json();
+        this.setState({ loading: false, data: data });
+      })
+      .catch((err) => {
+        this.setState({ loading: false, error: err });
+        console.log(err);
+      });
+  };
   render() {
-    return <TicketDetails />;
+    if (this.state.loading) {
+      return <CircularProgress />;
+    }
+    return <TicketDetails data={this.state.data} />;
   }
 }
