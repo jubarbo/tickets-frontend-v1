@@ -25,6 +25,13 @@ class Ticket extends Component {
     };
   }
 
+  updateButton() {
+    return {
+      backgroundColor: "#c35858",
+      color: "#fff"
+    }
+  }
+
   isDoneStyle() {
     return {
       fontSize: "20px",
@@ -38,7 +45,7 @@ class Ticket extends Component {
     return (
       <Card>
         <CardContent>
-        <Typography  color="textSecondary" gutterBottom>
+          <Typography color="textSecondary" gutterBottom>
             {ticket._id}
           </Typography>
 
@@ -49,8 +56,6 @@ class Ticket extends Component {
           </Typography>
 
           <p>{ticket.description}</p>
-
-          <p style={this.isDoneStyle()}>{ticket.done ? "Finalizado" : "Sin finalizar"}</p>
 
           <InputLabel htmlFor="done">
             Hecho
@@ -63,11 +68,14 @@ class Ticket extends Component {
               onChange={this.props.checkDone.bind(this, ticket._id)}
             />
           </InputLabel>
-          
+
+          <p style={this.isDoneStyle()}>
+            {ticket.done ? "Finalizado" : "Sin finalizar"}
+          </p>
 
           <FormControl>
             <Button
-            href={`/ticket/${ticket._id}`}
+              href={`/ticket/${ticket._id}`}
               variant="contained"
               color="primary"
             >
@@ -75,9 +83,9 @@ class Ticket extends Component {
             </Button>
             <br />
             <Button
-            href={`/edit/${ticket._id}`}
+              style={this.updateButton()}
+              href={`/edit/${ticket._id}`}
               variant="outlined"
-              color="secondary"
             >
               Actualizar
             </Button>
@@ -92,14 +100,6 @@ Ticket.propTypes = {
   ticket: propTypes.object.isRequired,
 };
 
-// const btnDelete = {
-//   background: "#ea2027",
-//   // fontSize: "18px",
-//   // color: "#fff",
-//   // border: "none",
-//   // padding: "10px",
-//   // borderRadius: "50%",
-//   // cursor: "pointer",
-// };
+
 
 export default Ticket;

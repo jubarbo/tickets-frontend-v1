@@ -48,10 +48,6 @@ class TicketDetails extends Component {
 
           <p>{ticket.description}</p>
 
-          <p style={this.isDoneStyle()}>
-            {ticket.done ? "Finalizado" : "Sin finalizar"}
-          </p>
-
           <InputLabel htmlFor="done">
             Hecho
             <Checkbox
@@ -63,6 +59,9 @@ class TicketDetails extends Component {
               onChange={this.props.checkDone.bind(this, ticket._id)}
             />
           </InputLabel>
+          <p style={this.isDoneStyle()}>
+            {ticket.done ? "Finalizado" : "Sin finalizar"}
+          </p>
         </CardContent>
       </Card>
     );

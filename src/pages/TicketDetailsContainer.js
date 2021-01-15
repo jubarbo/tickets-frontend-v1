@@ -101,7 +101,6 @@ export default class TicketDetailsContainer extends Component {
         />
 
         <FormControl>
-          
           <br />
           <Button
             href={`/edit/${ticket._id}`}
@@ -119,6 +118,10 @@ export default class TicketDetailsContainer extends Component {
           >
             Eliminar
           </Button>
+          <br />
+          <Button style={comeBackButton} href="/" variant="outlined" >
+            Regresar
+          </Button>
         </FormControl>
       </Container>
     );
@@ -134,3 +137,9 @@ const btnDelete = {
   // borderRadius: "50%",
   // cursor: "pointer",
 };
+
+
+const comeBackButton = {
+  backgroundColor:"#d62e9a",
+  color: "#fff"
+}
