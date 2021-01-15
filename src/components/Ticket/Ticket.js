@@ -1,12 +1,16 @@
 import React, { Component } from "react";
 import propTypes from "prop-types";
 import { Link } from "react-router-dom";
+import { makeStyles } from "@material-ui/core/styles";
+
 import {
   Button,
   FormControl,
-  Container,
+  Card,
   Checkbox,
   InputLabel,
+  CardContent,
+  Typography,
 } from "@material-ui/core";
 
 class Ticket extends Component {
@@ -33,35 +37,45 @@ class Ticket extends Component {
   render() {
     const { ticket } = this.props;
     return (
-      <Container>
-        <Link to={`/ticket/${ticket._id}`}>
-          <p style={this.isDoneStyle()}>
-            {ticket.title} - {ticket.description} -
-            {ticket.done ? "Hecho" : "No hecho"} - {ticket._id}
-          </p>
-        </Link>
-        <InputLabel htmlFor="done">
-          Hecho
-          <Checkbox
-            id="done"
-            className="checkDone"
-            color="primary"
-            laber="Hecho"
-            checked={ticket.done}
-            onChange={this.props.checkDone.bind(this, ticket._id)}
-          />
-        </InputLabel>
-        <FormControl>
-          <Button
-            style={btnDelete}
-            onClick={this.props.onDelete.bind(this, ticket._id)}
-            variant="contained"
-            color="secondary"
-          >
-            Eliminar
-          </Button>
-        </FormControl>
-      </Container>
+      <Card>
+        <CardContent>
+        <Typography  color="textSecondary" gutterBottom>
+            {ticket._id}
+          </Typography>
+
+          <Typography variant="h5" component="h2">
+            <Link to={`/ticket/${ticket._id}`}>
+              <p>{ticket.title}</p>
+            </Link>
+          </Typography>
+
+          <p>{ticket.description}</p>
+
+          <p style={this.isDoneStyle()}>{ticket.done ? "Finalizado" : "Sin finalizar"}</p>
+
+          <InputLabel htmlFor="done">
+            Hecho
+            <Checkbox
+              id="done"
+              className="checkDone"
+              color="primary"
+              laber="Hecho"
+              checked={ticket.done}
+              onChange={this.props.checkDone.bind(this, ticket._id)}
+            />
+          </InputLabel>
+          <FormControl>
+            <Button
+              style={btnDelete}
+              onClick={this.props.onDelete.bind(this, ticket._id)}
+              variant="contained"
+              color="secondary"
+            >
+              Eliminar
+            </Button>
+          </FormControl>
+        </CardContent>
+      </Card>
     );
   }
 }

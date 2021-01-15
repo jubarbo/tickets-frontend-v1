@@ -1,3 +1,4 @@
+import { CircularProgress } from "@material-ui/core";
 import React, { Component } from "react";
 import Ticket from "./Ticket";
 
@@ -88,6 +89,11 @@ class TicketList extends Component {
   };
 
   render() {
+
+    if(this.state.loading){
+      return <CircularProgress />
+  }
+
     return this.state.data.map((ticket) => (
       <Ticket
         ticket={ticket}
