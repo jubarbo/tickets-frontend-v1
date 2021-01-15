@@ -17,13 +17,13 @@ class TicketList extends Component {
         this.setState({ loading: false, error: err });
       });
 
-    this.intervalId = setInterval(async () => {
-      await this.fetchData();
-    }, 5000);
+    // this.intervalId = setInterval(async () => {
+    //   await this.fetchData();
+    // }, 10000);
   }
 
   componentWillUnmount() {
-    clearInterval(this.intervalId);
+    // clearInterval(this.intervalId);
   }
 
   fetchData = async () => {
@@ -33,8 +33,14 @@ class TicketList extends Component {
     return data;
   };
 
+  deleteTicket = async (_id) => {
+    const res = await fetch(`http://93.189.91.4:3000/api/tickets/${_id}`, {
+      method: "DELETE",
+    });
+    return res;
+  };
+
   onDelete = (_id) => {
-    
     this.deleteTicket(_id)
       .then(async (res) => {
         const message = await res.json();
@@ -50,22 +56,36 @@ class TicketList extends Component {
       });
   };
 
-  deleteTicket = async (_id) => {
-    const res = await fetch(`http://93.189.91.4:3000/api/tickets/${_id}`, {
-      method: "DELETE",
+  onCheck = (_id) => {
+    this.state.data.map((ticket) => {
+      if (ticket._id === _id) {
+        const ticketState = JSON.stringify(this.state)
+        ticket.done = !ticket.done;
+        this.setState({ done: ticket.done });
+
+        this.updateCheckDone(_id, ticket.done)
+          .then(async (res) => {
+            const ticketUpdated = await res.json();
+            console.log(`${JSON.stringify(ticketUpdated.message)}`);
+          })
+          .catch((err) => {
+            console.log(err);
+            this.setState({ error: err });
+          });
+      }
     });
-    return res;
+    console.log(_id);
   };
 
-  checkDone = (_id) => {
-    const newTickets = this.state.data.map((ticket) => {
-      if (ticket._id === _id) {
-        ticket.done = !ticket.done;
-      }
-      return ticket;
+  updateCheckDone = async (_id, isDone) => {
+    const res = await fetch(`http://93.189.91.4:3000/api/tickets/${_id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ done: isDone }),
     });
-
-    this.setState({ data: newTickets });
+    return res;
   };
 
   render() {
@@ -74,7 +94,7 @@ class TicketList extends Component {
         ticket={ticket}
         key={ticket._id}
         onDelete={this.onDelete}
-        checkDone={this.checkDone}
+        checkDone={this.onCheck}
       />
     ));
   }

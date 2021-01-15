@@ -18,8 +18,8 @@ class TicketForm extends Component {
 
     this.addTicket(this.state.title, this.state.description)
       .then(async (res) => {
-        const ticket = await res.json();
-        console.log(`Ticket ${ticket._id} created.`);
+        const ticketCreated = await res.json();
+        console.log(`Ticket ${ticketCreated._id} created.`);
       })
       .catch((err) => {
         console.log(err);
