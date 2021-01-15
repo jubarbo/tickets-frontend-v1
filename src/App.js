@@ -5,6 +5,7 @@ import TicketDetailsContainer from "./pages/TicketDetailsContainer";
 import TicketEditContainer from "./pages/TicketEditContainer";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Layout from "./components/Layout";
+import NotFound from './pages/NotFound'
 class App extends Component {
   render() {
     return (
@@ -23,6 +24,7 @@ class App extends Component {
               path="/edit/:ticketId"
               component={TicketEditContainer}
             />
+            <Route component={NotFound} />
           </Switch>
         </Layout>
       </BrowserRouter>
