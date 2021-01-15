@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import propTypes from "prop-types";
 import { Link } from "react-router-dom";
-import { makeStyles } from "@material-ui/core/styles";
 
 import {
   Button,
@@ -64,14 +63,16 @@ class Ticket extends Component {
               onChange={this.props.checkDone.bind(this, ticket._id)}
             />
           </InputLabel>
+          
+
           <FormControl>
             <Button
-              style={btnDelete}
-              onClick={this.props.onDelete.bind(this, ticket._id)}
+            href={`/ticket/${ticket._id}`}
+              // onClick={this.props.onDelete.bind(this, ticket._id)}
               variant="contained"
-              color="secondary"
+              color="primary"
             >
-              Eliminar
+              Ver Más
             </Button>
           </FormControl>
         </CardContent>
@@ -84,14 +85,14 @@ Ticket.propTypes = {
   ticket: propTypes.object.isRequired,
 };
 
-const btnDelete = {
-  background: "#ea2027",
-  // fontSize: "18px",
-  // color: "#fff",
-  // border: "none",
-  // padding: "10px",
-  // borderRadius: "50%",
-  // cursor: "pointer",
-};
+// const btnDelete = {
+//   background: "#ea2027",
+//   // fontSize: "18px",
+//   // color: "#fff",
+//   // border: "none",
+//   // padding: "10px",
+//   // borderRadius: "50%",
+//   // cursor: "pointer",
+// };
 
 export default Ticket;
