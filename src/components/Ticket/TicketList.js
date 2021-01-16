@@ -81,7 +81,8 @@ class TicketList extends Component {
 
     return this.state.data.map((ticket) => (
       <Ticket ticket={ticket} key={ticket._id} checkDone={this.onCheck} />
-    ));
+    )).reverse();
+
   }
 }
 

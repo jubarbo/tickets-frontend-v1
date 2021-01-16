@@ -1,12 +1,14 @@
-import React, { Component } from "react";
-import TicketForm from '../components/TicketNew/TicketForm'
-class TicketNew extends Component {
+import React from "react";
+import TicketForm from "../components/Ticket/TicketForm";
+import HomeButton from "../components/HomeButton";
 
-
-  render() {
-    return <TicketForm />;
- }
+function TicketNew() {
+  return (
+    <div>
+      <TicketForm isNew />
+      <HomeButton />
+    </div>
+  );
 }
-
 
 export default TicketNew;

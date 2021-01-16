@@ -1,32 +1,55 @@
 import React, { Component } from "react";
-import "./styles/ticketForm.css";
-import { Button, FormControl, TextField, Container } from "@material-ui/core";
+import "../styles/ticketForm.css";
+import {
+  Button,
+  FormControl,
+  TextField,
+  Container,
+  Typography,
+} from "@material-ui/core";
 
-const API_URL = process.env.REACT_APP_TICKETS_API
+const API_URL = process.env.REACT_APP_TICKETS_API;
 
 class TicketForm extends Component {
   state = {
-    title: "",
-    description: "",
+    _id: this.props._id,
+    title: this.props.title,
+    description: this.props.description,
     loading: true,
     error: false,
   };
 
   componentDidMount() {
     this.setState({ loading: false });
+    console.log(this.state._id);
+    // console.log(this.props.match.params.ticketId)
   }
   onSubmit = (e) => {
     e.preventDefault();
 
-    this.addTicket(this.state.title, this.state.description)
-      .then(async (res) => {
-        const ticketCreated = await res.json();
-        console.log(`Ticket ${ticketCreated._id} created.`);
-      })
-      .catch((err) => {
-        console.log(err);
-        this.setState({ error: err });
-      });
+    if (this.props.isNew) {
+      this.addTicket(this.state.title, this.state.description)
+        .then(async (res) => {
+          const ticketCreated = await res.json();
+          console.log(`Ticket ${ticketCreated._id} created.`);
+        })
+        .catch((err) => {
+          console.log(err);
+          this.setState({ error: err });
+        });
+    }
+
+    if (!this.props.isNew && this.state._id) {
+      this.updateTicket(this.state._id, this.state)
+        .then(async (res) => {
+          const ticketUpdated = await res.json();
+          console.log(`${JSON.stringify(ticketUpdated.message)}`);
+        })
+        .catch((err) => {
+          console.log(err);
+          this.setState({ error: err });
+        });
+    }
   };
 
   onChange = (e) => {
@@ -54,9 +77,24 @@ class TicketForm extends Component {
     return res;
   };
 
+  updateTicket = async (_id, newData) => {
+    const res = await fetch(`${API_URL}/${_id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        title: newData.title,
+        description: newData.description,
+      }),
+    });
+    return res;
+  };
+
   render() {
     return (
       <Container>
+        <Typography>{this.props._id}</Typography>
         <FormControl>
           <TextField
             id="ticketTitle"
@@ -84,7 +122,7 @@ class TicketForm extends Component {
         <br />
         <FormControl>
           <Button variant="contained" color="primary" onClick={this.onSubmit}>
-            Enviar
+            Guardar
           </Button>
         </FormControl>
       </Container>
