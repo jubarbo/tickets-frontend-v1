@@ -2,6 +2,7 @@ import { CircularProgress } from "@material-ui/core";
 import React, { Component } from "react";
 import Ticket from "./Ticket";
 
+const API_URL = process.env.REACT_APP_TICKETS_API
 class TicketList extends Component {
   state = {
     data: [],
@@ -28,14 +29,15 @@ class TicketList extends Component {
   }
 
   fetchData = async () => {
-    const res = await fetch("http://93.189.91.4:3000/api/tickets");
+    const res = await fetch(API_URL);
     const data = await res.json();
     this.setState({ loading: true, error: null, data: data.tickets });
     return data;
   };
 
   deleteTicket = async (_id) => {
-    const res = await fetch(`http://93.189.91.4:3000/api/tickets/${_id}`, {
+    const dataUrl = `${API_URL}/${_id}`;
+    const res = await fetch(dataUrl, {
       method: "DELETE",
     });
     return res;
@@ -57,12 +59,12 @@ class TicketList extends Component {
             this.setState({ error: err });
           });
       }
-      return ticket
+      return ticket;
     });
   };
 
   updateCheckDone = async (_id, isDone) => {
-    const res = await fetch(`http://93.189.91.4:3000/api/tickets/${_id}`, {
+    const res = await fetch(`${API_URL}/${_id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -73,17 +75,12 @@ class TicketList extends Component {
   };
 
   render() {
-
-    if(this.state.loading){
-      return <CircularProgress />
-  }
+    if (this.state.loading) {
+      return <CircularProgress />;
+    }
 
     return this.state.data.map((ticket) => (
-      <Ticket
-        ticket={ticket}
-        key={ticket._id}
-        checkDone={this.onCheck}
-      />
+      <Ticket ticket={ticket} key={ticket._id} checkDone={this.onCheck} />
     ));
   }
 }

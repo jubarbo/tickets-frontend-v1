@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import "./styles/ticketForm.css";
 import { Button, FormControl, TextField, Container } from "@material-ui/core";
 
+const API_URL = process.env.REACT_APP_TICKETS_API
+
 class TicketForm extends Component {
   state = {
     title: "",
@@ -38,7 +40,7 @@ class TicketForm extends Component {
       title: title,
       description: description,
     };
-    const res = await fetch("http://93.189.91.4:3000/api/tickets", {
+    const res = await fetch(API_URL, {
       method: "POST",
       mode: "cors",
       cache: "no-cache",

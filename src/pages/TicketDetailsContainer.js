@@ -1,13 +1,14 @@
 import React, { Component } from "react";
 import TicketDetails from "../components/Ticket/TicketDetails";
 // import Ticket from "../components/Ticket/Ticket";
-
 import {
   CircularProgress,
   FormControl,
   Button,
   Container,
 } from "@material-ui/core";
+
+const API_URL = process.env.REACT_APP_TICKETS_API
 
 export default class TicketDetailsContainer extends Component {
   state = {
@@ -76,7 +77,7 @@ export default class TicketDetailsContainer extends Component {
     this.setState({ loading: true, error: null });
     const ticketId = this.props.match.params.ticketId;
 
-    await fetch(`http://93.189.91.4:3000/api/tickets/${ticketId}`)
+    await fetch(`${API_URL}${ticketId}`)
       .then(async (res) => {
         const data = await res.json();
         this.setState({ loading: false, data: data });
