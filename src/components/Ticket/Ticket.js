@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import propTypes from "prop-types";
 import { Link } from "react-router-dom";
+import "./styles/Ticket.css";
 
 import {
   Button,
   FormControl,
   Card,
+  Box,
   Checkbox,
   InputLabel,
   CardContent,
@@ -28,14 +30,12 @@ class Ticket extends Component {
   updateButton() {
     return {
       backgroundColor: "#c35858",
-      color: "#fff"
-    }
+      color: "#fff",
+    };
   }
 
   isDoneStyle() {
     return {
-      fontSize: "20px",
-      textDecoration: "none",
       color: this.state.data.ticket.done ? "green" : "red",
     };
   }
@@ -43,19 +43,19 @@ class Ticket extends Component {
   render() {
     const { ticket } = this.props;
     return (
-      <Card>
+      <Card className="ticketStyles">
         <CardContent>
-          <Typography color="textSecondary" gutterBottom>
-            {ticket._id}
-          </Typography>
-
           <Typography variant="h5" component="h2">
-            <Link to={`/ticket/${ticket._id}`}>
-              <p>{ticket.title}</p>
+            <Link className="titleLink" to={`/ticket/${ticket._id}`}>
+              <span>{ticket.title}</span>
             </Link>
           </Typography>
 
-          <p>{ticket.description}</p>
+          <Card className="descriptionCard">
+            <CardContent>
+              <p className="descriptionText">{ticket.description}</p>
+            </CardContent>
+          </Card>
 
           <InputLabel htmlFor="done">
             Hecho
@@ -69,19 +69,22 @@ class Ticket extends Component {
             />
           </InputLabel>
 
-          <p style={this.isDoneStyle()}>
+          <p className="isDoneText" style={this.isDoneStyle()}>
             {ticket.done ? "Finalizado" : "Sin finalizar"}
           </p>
-
+          <Box className="buttonTicket">
+            <FormControl>
+              <Button
+                className="buttonTicket"
+                href={`/ticket/${ticket._id}`}
+                variant="contained"
+                color="primary"
+              >
+                Ver Más
+              </Button>
+            </FormControl>
+          </Box>
           <FormControl>
-            <Button
-              href={`/ticket/${ticket._id}`}
-              variant="contained"
-              color="primary"
-            >
-              Ver Más
-            </Button>
-            <br />
             <Button
               style={this.updateButton()}
               href={`/edit/${ticket._id}`}
@@ -99,7 +102,5 @@ class Ticket extends Component {
 Ticket.propTypes = {
   ticket: propTypes.object.isRequired,
 };
-
-
 
 export default Ticket;

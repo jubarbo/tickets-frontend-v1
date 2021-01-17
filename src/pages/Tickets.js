@@ -1,23 +1,43 @@
-import React, { Component } from "react";
+import React from "react";
 import TicketList from "../components/Ticket/TicketList";
-import { Button, Container, FormControl } from "@material-ui/core";
+import AddIcon from "@material-ui/icons/Add";
+import { makeStyles } from "@material-ui/core/styles";
 
-class Tickets extends Component {
-  render() {
-    return (
-      <Container>
-        <Container>
-          <FormControl>
-            <Button href="/new" variant="outlined" color="primary">
-              Nuevo Ticket
-            </Button>
-          </FormControl>
-        </Container>
+import {
+  Container,
+  Fab,
+  Tooltip,
+} from "@material-ui/core";
 
-        <TicketList />
-      </Container>
-    );
+const useStyles = makeStyles((theme) => ({
+  absolute: {
+    position: "absolute",
+    bottom: theme.spacing(2),
+    right: theme.spacing(1),
+  },
+}));
+
+const tooltipStyles = () => {
+  return {
+    position: "fixed",
+    zIndex: "999",
   }
+}
+
+function Tickets() {
+  const classes = useStyles();
+  return (
+    <Container>
+      
+      <Tooltip title="Add ticket" style={tooltipStyles()}>
+        <Fab href="/new" color="primary" className={classes.absolute}>
+          <AddIcon />
+        </Fab>
+      </Tooltip>
+
+      <TicketList />
+    </Container>
+  );
 }
 
 export default Tickets;

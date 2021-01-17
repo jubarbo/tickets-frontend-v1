@@ -21,8 +21,6 @@ class TicketForm extends Component {
 
   componentDidMount() {
     this.setState({ loading: false });
-    console.log(this.state._id);
-    // console.log(this.props.match.params.ticketId)
   }
   onSubmit = (e) => {
     e.preventDefault();

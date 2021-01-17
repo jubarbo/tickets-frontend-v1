@@ -5,7 +5,8 @@ import TicketDetailsContainer from "./pages/TicketDetailsContainer";
 import TicketEditContainer from "./pages/TicketEditContainer";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Layout from "./components/Layout";
-import NotFound from './pages/NotFound'
+import NotFound from "./pages/NotFound";
+
 class App extends Component {
   render() {
     return (
