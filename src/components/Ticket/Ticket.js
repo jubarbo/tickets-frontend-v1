@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import propTypes from "prop-types";
 import { Link } from "react-router-dom";
+import isDoneChangeColor from "../../utils/isDoneChangeColor";
 import "./styles/Ticket.css";
 
 import {
@@ -34,11 +35,6 @@ class Ticket extends Component {
     };
   }
 
-  isDoneStyle() {
-    return {
-      color: this.state.data.ticket.done ? "green" : "red",
-    };
-  }
 
   render() {
     const { ticket } = this.props;
@@ -53,7 +49,9 @@ class Ticket extends Component {
 
           <Card className="descriptionCard">
             <CardContent>
-              <p className="descriptionText">{ticket.description}</p>
+              <Typography className="descriptionText">
+                {ticket.description}
+              </Typography>
             </CardContent>
           </Card>
 
@@ -69,9 +67,10 @@ class Ticket extends Component {
             />
           </InputLabel>
 
-          <p className="isDoneText" style={this.isDoneStyle()}>
+          {/* <Typography className="isDoneText" style={this.isDoneStyle()}> */}
+          <Typography className="isDoneText" style={isDoneChangeColor(this.state.data.ticket.done)}>
             {ticket.done ? "Finalizado" : "Sin finalizar"}
-          </p>
+          </Typography>
           <Box className="buttonTicket">
             <FormControl>
               <Button

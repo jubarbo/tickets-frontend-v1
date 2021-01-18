@@ -1,6 +1,7 @@
-import { CircularProgress } from "@material-ui/core";
+// import { CircularProgress } from "@material-ui/core";
 import React, { Component } from "react";
 import Ticket from "./Ticket";
+import Loader from "../Loader"
 
 const API_URL = process.env.REACT_APP_TICKETS_API
 class TicketList extends Component {
@@ -76,14 +77,16 @@ class TicketList extends Component {
 
   render() {
     if (this.state.loading) {
-      return <CircularProgress />;
+      return <Loader />;
     }
 
     return this.state.data.map((ticket) => (
+      
       <Ticket ticket={ticket} key={ticket._id} checkDone={this.onCheck} />
-    )).reverse();
-
-  }
+      )).reverse();
+      
+    }
+  
 }
 
 export default TicketList;

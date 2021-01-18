@@ -33,7 +33,7 @@ export default class TicketEditContainer extends Component {
 
   render() {
     if(this.state.loading){
-      return <CircularProgress/ >
+      return <CircularProgress />
     }
 
     return <TicketEdit ticket={this.state.data} />;

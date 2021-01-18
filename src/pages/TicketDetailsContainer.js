@@ -1,19 +1,14 @@
 import React, { Component } from "react";
+import Loader from "../components/Loader";
 import TicketDetails from "../components/Ticket/TicketDetails";
 import HomeButton from "../components/HomeButton";
 import {
-  CircularProgress,
   FormControl,
   Button,
   Container,
 } from "@material-ui/core";
 
 const API_URL = process.env.REACT_APP_TICKETS_API;
-
-// const comeBackButton = {
-//   backgroundColor:"#d62e9a",
-//   color: "#fff"
-// }
 
 export default class TicketDetailsContainer extends Component {
   state = {
@@ -92,9 +87,11 @@ export default class TicketDetailsContainer extends Component {
         console.log(err);
       });
   };
+  
   render() {
+
     if (this.state.loading) {
-      return <CircularProgress />;
+      return <Loader />;
     }
     const ticket = this.state.data;
 
@@ -134,10 +131,4 @@ export default class TicketDetailsContainer extends Component {
 
 const btnDelete = {
   background: "#ea2027",
-  // fontSize: "18px",
-  // color: "#fff",
-  // border: "none",
-  // padding: "10px",
-  // borderRadius: "50%",
-  // cursor: "pointer",
 };

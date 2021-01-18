@@ -8,7 +8,8 @@ import Layout from "./components/Layout";
 import NotFound from "./pages/NotFound";
 
 class App extends Component {
-  render() {
+  
+  render() { 
     return (
       <BrowserRouter>
         <Layout>

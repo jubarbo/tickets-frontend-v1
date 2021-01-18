@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import propTypes from "prop-types";
-import { Link } from "react-router-dom";
+import "./styles/Ticket.css";
+import isDoneChangeColor from '../../utils/isDoneChangeColor'
+// import { Link } from "react-router-dom";
 
 import {
   Card,
@@ -23,30 +25,23 @@ class TicketDetails extends Component {
     };
   }
 
-  isDoneStyle() {
-    return {
-      fontSize: "20px",
-      textDecoration: "none",
-      color: this.state.data.ticket.done ? "green" : "red",
-    };
-  }
 
   render() {
     const { ticket } = this.props;
     return (
-      <Card>
+      <Card className="ticketStyles">
         <CardContent>
-          <Typography color="textSecondary" gutterBottom>
-            {ticket._id}
-          </Typography>
-
           <Typography variant="h5" component="h2">
-            <Link to={`/ticket/${ticket._id}`}>
-              <p>{ticket.title}</p>
-            </Link>
+            <span>{ticket.title}</span>
           </Typography>
 
-          <p>{ticket.description}</p>
+          <Card className="descriptionCard">
+            <CardContent>
+              <Typography className="descriptionText">
+                {ticket.description}
+              </Typography>
+            </CardContent>
+          </Card>
 
           <InputLabel htmlFor="done">
             Hecho
@@ -59,9 +54,10 @@ class TicketDetails extends Component {
               onChange={this.props.checkDone.bind(this, ticket._id)}
             />
           </InputLabel>
-          <p style={this.isDoneStyle()}>
+          {/* <Typography className="isDoneText" style={this.isDoneStyle()}> */}
+          <Typography className="isDoneText" style={isDoneChangeColor(this.state.data.ticket.done)}>
             {ticket.done ? "Finalizado" : "Sin finalizar"}
-          </p>
+          </Typography>
         </CardContent>
       </Card>
     );
@@ -71,15 +67,5 @@ class TicketDetails extends Component {
 TicketDetails.propTypes = {
   ticket: propTypes.object.isRequired,
 };
-
-// const btnDelete = {
-//   background: "#ea2027",
-//   // fontSize: "18px",
-//   // color: "#fff",
-//   // border: "none",
-//   // padding: "10px",
-//   // borderRadius: "50%",
-//   // cursor: "pointer",
-// };
 
 export default TicketDetails;
