@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import Loader from "../components/Loader";
 import TicketDetails from "../components/Ticket/TicketDetails";
-import HomeButton from "../components/HomeButton";
+
+
+
 import {
   FormControl,
   Button,
@@ -29,7 +31,7 @@ export default class TicketDetailsContainer extends Component {
     this.deleteTicket(_id)
       .then(async (res) => {
         const message = await res.json();
-        console.log(message);
+        console.log(message.message);
         setTimeout(() => {
           this.props.history.push("/");
         }, 500);
@@ -101,9 +103,10 @@ export default class TicketDetailsContainer extends Component {
           ticket={this.state.data}
           key={this.state.data._id}
           checkDone={this.onCheck}
+          onDelete= {this.onDelete}
         />
 
-        <FormControl>
+        {/* <FormControl>
           <br />
           <Button
             href={`/edit/${ticket._id}`}
@@ -122,8 +125,7 @@ export default class TicketDetailsContainer extends Component {
             Eliminar
           </Button>
           <br />
-          <HomeButton />
-        </FormControl>
+        </FormControl> */}
       </Container>
     );
   }

@@ -3,13 +3,9 @@ import { makeStyles } from "@material-ui/core/styles";
 import MenuIcon from "@material-ui/icons/Menu";
 import ArrowBack from "@material-ui/icons/ArrowBack";
 import "./styles/Navbar.css";
+import Navigation from "../components/Navigation";
 
-import {
-  AppBar,
-  IconButton,
-  Typography,
-  Toolbar,
-} from "@material-ui/core";
+import { AppBar, IconButton, Typography, Toolbar } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -26,17 +22,17 @@ const useStyles = makeStyles((theme) => ({
 
 //Pendiente para ocultar en home
 const hideIfHome = (ifHome) => {
-  return true ? {display:"block"} : {display:"none"}; 
-}
+  return true ? { display: "block" } : { display: "none" };
+};
 
 export default function Navbar() {
   const classes = useStyles();
 
-
   return (
     <AppBar position="static">
       <Toolbar>
-        <IconButton
+        <Navigation />
+        {/* <IconButton
           edge="start"
           href="/"
           style={hideIfHome()}
@@ -45,7 +41,7 @@ export default function Navbar() {
           aria-label="menu"
         >
           <ArrowBack />
-        </IconButton>
+        </IconButton> */}
         <Typography variant="h6" className={classes.title}>
           Tickets App
         </Typography>

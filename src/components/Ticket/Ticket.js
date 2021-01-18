@@ -67,9 +67,8 @@ class Ticket extends Component {
             />
           </InputLabel>
 
-          {/* <Typography className="isDoneText" style={this.isDoneStyle()}> */}
           <Typography className="isDoneText" style={isDoneChangeColor(this.state.data.ticket.done)}>
-            {ticket.done ? "Finalizado" : "Sin finalizar"}
+            {ticket.done ? "Finalizado" : "Pendiente"}
           </Typography>
           <Box className="buttonTicket">
             <FormControl>

@@ -11,12 +11,20 @@
 }
 
 .ticketStyles {
-  margin: 1.2em 0 0.8em;
+  margin: 1.2em auto .8em;
+}
+
+.btnDelete {
+  margin: -.6em 1.4em .2em;
+  background-color: #ea2027;
+  border: solid 2px blue;
+  
 }
 
 .isDoneText {
   font-size: 1.2em;
   margin: 0 0 1em;
+  padding: 0 0 .8em .4em;
   text-decoration: none;
 }
 
@@ -36,4 +44,12 @@
 
 .titleLink:hover {
   color: #666;
+}
+
+
+@media screen and (min-width: 1200px) {
+  .ticketStyles {
+    max-width: 90%;
+    margin: 1.4em auto 1em;
+  }
 }
