@@ -1,6 +1,6 @@
-import { CircularProgress } from "@material-ui/core";
 import React, { Component } from "react";
 import TicketEdit from "../components/Ticket/TicketEdit";
+import Loader from '../components/Loader';
 
 const API_URL = process.env.REACT_APP_TICKETS_API
 
@@ -33,9 +33,8 @@ export default class TicketEditContainer extends Component {
 
   render() {
     if(this.state.loading){
-      return <CircularProgress />
+      return <Loader />
     }
-
-    return <TicketEdit ticket={this.state.data} />;
+    return <TicketEdit ticket={this.state.data} history={this.props.history} />;
   }
 }

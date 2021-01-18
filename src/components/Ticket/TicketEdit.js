@@ -1,18 +1,19 @@
 import React from "react";
 import TicketForm from "./TicketForm";
-import HomeButton from "../HomeButton";
 
 function TicketEdit(props) {
   const ticket = props.ticket;
+  // console.log(props.history)
   return (
     <div>
-      Editar esto:
+      
       <TicketForm
         _id={ticket._id}
         title={ticket.title}
         description={ticket.description}
+        history={props.history}
+        
       />
-      <HomeButton />
     </div>
   );
 }

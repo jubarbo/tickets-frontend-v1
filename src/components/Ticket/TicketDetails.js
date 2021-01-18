@@ -22,11 +22,6 @@ class TicketDetails extends Component {
     error: false,
   };
 
-  classCheckDone() {
-    return {
-      width: "4em",
-    };
-  }
 
   render() {
     const { ticket } = this.props;
@@ -67,7 +62,6 @@ class TicketDetails extends Component {
             <Fab
               style={btnEdit}
               href={`/edit/${ticket._id}`}
-              onClick={this.props.onDelete.bind(this, ticket._id)}
               color="primary"
             >
               <EditOutlinedIcon />

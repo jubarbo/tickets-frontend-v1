@@ -2,13 +2,14 @@ import React, { Component } from "react";
 import propTypes from "prop-types";
 import { Link } from "react-router-dom";
 import isDoneChangeColor from "../../utils/isDoneChangeColor";
+import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
+import OpenInNewOutlinedIcon from "@material-ui/icons/OpenInNewOutlined";
 import "./styles/Ticket.css";
 
 import {
-  Button,
-  FormControl,
   Card,
-  Box,
+  Fab,
+  Tooltip,
   Checkbox,
   InputLabel,
   CardContent,
@@ -34,7 +35,6 @@ class Ticket extends Component {
       color: "#fff",
     };
   }
-
 
   render() {
     const { ticket } = this.props;
@@ -67,10 +67,34 @@ class Ticket extends Component {
             />
           </InputLabel>
 
-          <Typography className="isDoneText" style={isDoneChangeColor(this.state.data.ticket.done)}>
+          <Typography
+            className="isDoneText"
+            style={isDoneChangeColor(this.state.data.ticket.done)}
+          >
             {ticket.done ? "Finalizado" : "Pendiente"}
           </Typography>
-          <Box className="buttonTicket">
+
+          <Tooltip title="Delete ticket">
+            <Fab
+              style={btnDelete}
+              href={`/ticket/${ticket._id}`}
+              color="secondary"
+            >
+              <OpenInNewOutlinedIcon />
+            </Fab>
+          </Tooltip>
+          <Tooltip title="Edit ticket">
+            <Fab
+              style={btnEdit}
+              href={`/edit/${ticket._id}`}
+              // onClick={this.props.onDelete.bind(this, ticket._id)}
+              color="primary"
+            >
+              <EditOutlinedIcon />
+            </Fab>
+          </Tooltip>
+
+          {/* <Box className="buttonTicket">
             <FormControl>
               <Button
                 className="buttonTicket"
@@ -90,12 +114,21 @@ class Ticket extends Component {
             >
               Actualizar
             </Button>
-          </FormControl>
+          </FormControl> */}
         </CardContent>
       </Card>
     );
   }
 }
+
+const btnDelete = {
+  background: "#ea2027",
+  margin: ".2em .6em .2em",
+};
+
+const btnEdit = {
+  margin: ".2em .6em .2em",
+};
 
 Ticket.propTypes = {
   ticket: propTypes.object.isRequired,

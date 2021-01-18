@@ -1,11 +1,14 @@
 import React, { Component } from "react";
-import "../styles/ticketForm.css";
+import SaveOutlinedIcon from "@material-ui/icons/SaveOutlined";
+import "./styles/TicketForm.css";
 import {
-  Button,
   FormControl,
   TextField,
   Container,
-  Typography,
+  Tooltip,
+  Fab,
+  Card,
+  CardContent,
 } from "@material-ui/core";
 
 const API_URL = process.env.REACT_APP_TICKETS_API;
@@ -32,8 +35,8 @@ class TicketForm extends Component {
           console.log(`Ticket ${ticketCreated._id} created.`);
         })
         .catch((err) => {
-          console.log(err);
           this.setState({ error: err });
+          console.log(err);
         });
     }
 
@@ -42,6 +45,9 @@ class TicketForm extends Component {
         .then(async (res) => {
           const ticketUpdated = await res.json();
           console.log(`${JSON.stringify(ticketUpdated.message)}`);
+          setTimeout(() => {
+            this.props.history.push("/");
+          }, 500);
         })
         .catch((err) => {
           console.log(err);
@@ -91,41 +97,54 @@ class TicketForm extends Component {
 
   render() {
     return (
-      <Container>
-        <Typography>{this.props._id}</Typography>
-        <FormControl>
-          <TextField
-            id="ticketTitle"
-            name="title"
-            variant="outlined"
-            label="Write a title"
-            onChange={this.onChange}
-            value={this.state.title}
-          />
-        </FormControl>
-        <br />
-        <br />
-        <FormControl>
-          <TextField
-            id="ticketTextField"
-            name="description"
-            variant="outlined"
-            multiline
-            rows={5}
-            label="Write a description"
-            onChange={this.onChange}
-            value={this.state.description}
-          />
-        </FormControl>
-        <br />
-        <FormControl>
-          <Button variant="contained" color="primary" onClick={this.onSubmit}>
-            Guardar
-          </Button>
-        </FormControl>
-      </Container>
+      <Card className="ticketFormStyles">
+        <CardContent>
+          <Container style={frmContainer} className="formContainer">
+          
+            <FormControl>
+              <TextField
+                id="ticketTitle"
+                name="title"
+                variant="outlined"
+                label="Edit title"
+                onChange={this.onChange}
+                value={this.state.title}
+              />
+              <br />
+              <TextField
+                id="ticketTextField"
+                name="description"
+                variant="outlined"
+                multiline
+                rows={5}
+                label="Edit description"
+                onChange={this.onChange}
+                value={this.state.description}
+              />
+              <br />
+             
+              <Tooltip title="Save ticket">
+                <Fab style={btnSave} onClick={this.onSubmit} color="primary">
+                  <SaveOutlinedIcon />
+                </Fab>
+              </Tooltip>
+            </FormControl>
+          </Container>
+        </CardContent>
+      </Card>
     );
   }
 }
+
+const frmContainer = {
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+};
+
+const btnSave = {
+  margin: "-.6em .4em .4em .4em ",
+  alignSelf: "center",
+};
 
 export default TicketForm;

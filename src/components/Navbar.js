@@ -1,7 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import MenuIcon from "@material-ui/icons/Menu";
-import ArrowBack from "@material-ui/icons/ArrowBack";
 import "./styles/Navbar.css";
 import Navigation from "../components/Navigation";
 
@@ -20,10 +19,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-//Pendiente para ocultar en home
-const hideIfHome = (ifHome) => {
-  return true ? { display: "block" } : { display: "none" };
-};
+
 
 export default function Navbar() {
   const classes = useStyles();

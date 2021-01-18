@@ -5,8 +5,6 @@ import TicketDetails from "../components/Ticket/TicketDetails";
 
 
 import {
-  FormControl,
-  Button,
   Container,
 } from "@material-ui/core";
 
@@ -95,7 +93,6 @@ export default class TicketDetailsContainer extends Component {
     if (this.state.loading) {
       return <Loader />;
     }
-    const ticket = this.state.data;
 
     return (
       <Container>
@@ -105,32 +102,8 @@ export default class TicketDetailsContainer extends Component {
           checkDone={this.onCheck}
           onDelete= {this.onDelete}
         />
-
-        {/* <FormControl>
-          <br />
-          <Button
-            href={`/edit/${ticket._id}`}
-            variant="contained"
-            color="primary"
-          >
-            Actualizar
-          </Button>
-
-          <Button
-            style={btnDelete}
-            onClick={this.onDelete}
-            variant="contained"
-            color="secondary"
-          >
-            Eliminar
-          </Button>
-          <br />
-        </FormControl> */}
       </Container>
     );
   }
 }
 
-const btnDelete = {
-  background: "#ea2027",
-};
