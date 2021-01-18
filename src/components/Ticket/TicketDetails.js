@@ -12,6 +12,8 @@ import {
   CardContent,
   Typography,
   Fab,
+  Box,
+  Container,
   Tooltip,
 } from "@material-ui/core";
 
@@ -22,63 +24,67 @@ class TicketDetails extends Component {
     error: false,
   };
 
-
   render() {
     const { ticket } = this.props;
+    console.log(ticket.done);
+    const ticketState = ticket.done ? "Finalizado" : "Pendiente";
     return (
-      <Card className="ticketStyles">
-        <CardContent>
-          <Typography variant="h5" component="h2">
-            <span>{ticket.title}</span>
+      <Box>
+        <Container>
+          <Typography className="titleStyle" variant="h5" component="h1">
+            Ticket {ticketState}
           </Typography>
+        </Container>
+        <Card className="ticketStyles">
+          <CardContent>
+            <Typography variant="h5" component="h2">
+              <span>{ticket.title}</span>
+            </Typography>
 
-          <Card className="descriptionCard">
-            <CardContent>
-              <Typography className="descriptionText">
-                {ticket.description}
-              </Typography>
-            </CardContent>
-          </Card>
+            <Card className="descriptionCard">
+              <CardContent>
+                <Typography className="descriptionText">
+                  {ticket.description}
+                </Typography>
+              </CardContent>
+            </Card>
 
-          <InputLabel htmlFor="done">
-            Hecho
-            <Checkbox
-              id="done"
-              className="checkDone"
-              color="primary"
-              laber="Hecho"
-              checked={ticket.done}
-              onChange={this.props.checkDone.bind(this, ticket._id)}
-            />
-          </InputLabel>
-          <Typography
-            className="isDoneText"
-            style={isDoneChangeColor(this.state.data.ticket.done)}
-          >
-            {ticket.done ? "Finalizado" : "Pendiente"}
-          </Typography>
-
-          <Tooltip title="Edit ticket">
-            <Fab
-              style={btnEdit}
-              href={`/edit/${ticket._id}`}
-              color="primary"
+            <InputLabel htmlFor="done">
+              Hecho
+              <Checkbox
+                id="done"
+                className="checkDone"
+                color="primary"
+                laber="Hecho"
+                checked={ticket.done}
+                onChange={this.props.checkDone.bind(this, ticket._id)}
+              />
+            </InputLabel>
+            <Typography
+              className="isDoneText"
+              style={isDoneChangeColor(this.state.data.ticket.done)}
             >
-              <EditOutlinedIcon />
-            </Fab>
-          </Tooltip>
+              {ticket.done ? "Finalizado" : "Pendiente"}
+            </Typography>
 
-          <Tooltip title="Delete ticket">
-            <Fab
-              style={btnDelete}
-              onClick={this.props.onDelete.bind(this, ticket._id)}
-              color="secondary"
-            >
-              <DeleteOutlineRoundedIcon />
-            </Fab>
-          </Tooltip>
-        </CardContent>
-      </Card>
+            <Tooltip title="Edit ticket">
+              <Fab style={btnEdit} href={`/edit/${ticket._id}`} color="primary">
+                <EditOutlinedIcon />
+              </Fab>
+            </Tooltip>
+
+            <Tooltip title="Delete ticket">
+              <Fab
+                style={btnDelete}
+                onClick={this.props.onDelete.bind(this, ticket._id)}
+                color="secondary"
+              >
+                <DeleteOutlineRoundedIcon />
+              </Fab>
+            </Tooltip>
+          </CardContent>
+        </Card>
+      </Box>
     );
   }
 }

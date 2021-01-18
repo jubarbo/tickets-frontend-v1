@@ -74,7 +74,7 @@ class Ticket extends Component {
             {ticket.done ? "Finalizado" : "Pendiente"}
           </Typography>
 
-          <Tooltip title="Delete ticket">
+          <Tooltip title="View ticket">
             <Fab
               style={btnDelete}
               href={`/ticket/${ticket._id}`}
@@ -87,34 +87,12 @@ class Ticket extends Component {
             <Fab
               style={btnEdit}
               href={`/edit/${ticket._id}`}
-              // onClick={this.props.onDelete.bind(this, ticket._id)}
               color="primary"
             >
               <EditOutlinedIcon />
             </Fab>
           </Tooltip>
 
-          {/* <Box className="buttonTicket">
-            <FormControl>
-              <Button
-                className="buttonTicket"
-                href={`/ticket/${ticket._id}`}
-                variant="contained"
-                color="primary"
-              >
-                Ver Más
-              </Button>
-            </FormControl>
-          </Box>
-          <FormControl>
-            <Button
-              style={this.updateButton()}
-              href={`/edit/${ticket._id}`}
-              variant="outlined"
-            >
-              Actualizar
-            </Button>
-          </FormControl> */}
         </CardContent>
       </Card>
     );

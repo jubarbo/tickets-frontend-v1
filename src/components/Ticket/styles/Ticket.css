@@ -14,6 +14,11 @@
   margin: 1.2em auto .8em;
 }
 
+.titleStyle {
+  text-align: center;
+  padding-top: 1em;
+}
+
 .btnDelete {
   margin: -.6em 1.4em .2em;
   background-color: #ea2027;
