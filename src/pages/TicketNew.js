@@ -2,7 +2,7 @@ import React from "react";
 import { Typography, Container, Box } from "@material-ui/core";
 import TicketForm from "../components/Ticket/TicketForm";
 
-function TicketNew() {
+function TicketNew(props) {
   return (
     <Box>
       <Container>
@@ -10,7 +10,7 @@ function TicketNew() {
           Nuevo ticket
         </Typography>
       </Container>
-      <TicketForm isNew />
+      <TicketForm isNew history={props.history} />
     </Box>
   );
 }

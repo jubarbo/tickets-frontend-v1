@@ -15,9 +15,9 @@ const API_URL = process.env.REACT_APP_TICKETS_API;
 
 class TicketForm extends Component {
   state = {
-    _id: this.props._id,
-    title: this.props.title,
-    description: this.props.description,
+    _id: this.props._id || "",
+    title: this.props.title || "",
+    description: this.props.description || "",
     loading: true,
     error: false,
   };
@@ -33,6 +33,9 @@ class TicketForm extends Component {
         .then(async (res) => {
           const ticketCreated = await res.json();
           console.log(`Ticket ${ticketCreated._id} created.`);
+          setTimeout(() => {
+            this.props.history.push("/");
+          }, 500);
         })
         .catch((err) => {
           this.setState({ error: err });

@@ -21,6 +21,7 @@ const tooltipStyles = () => {
 
 function Layout(props) {
   const classes = useStyles();
+
   return (
     <React.Fragment>
       <Navbar />
