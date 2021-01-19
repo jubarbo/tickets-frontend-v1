@@ -8,11 +8,10 @@ import Layout from "./components/Layout";
 import NotFound from "./pages/NotFound";
 
 class App extends Component {
-  
   render() { 
     return (
       <BrowserRouter>
-        <Layout>
+        <Layout >
           <Switch>
             <Route exact path="/" component={Tickets} />
             <Route exact path="/new" component={TicketNew} />
